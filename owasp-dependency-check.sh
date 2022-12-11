@@ -27,7 +27,6 @@ docker run --rm \
     owasp/dependency-check:$DC_VERSION \
     --scan /src \
     --format "ALL" \
-    --project "$DC_PROJECT" \
-    --out /report
+    --project "$DC_PROJECT"
     # Use suppression like this: (where /src == $pwd)
     # --suppression "/src/security/dependency-check-suppression.xml"

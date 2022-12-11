@@ -7,13 +7,13 @@ pipeline {
     stage ('Initialize') {
       steps {
         sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
+               echo "PATH = ${PATH}"
+               echo "MAVEN_HOME = ${MAVEN_HOME}"
             ''' 
       }
     }
     
-    stage ('Check-Git-Secrets') {
+    stage ('Scan Git Secrets') {
       steps {
         sh 'rm trufflehog || true'
         sh 'docker run gesellix/trufflehog --json https://github.com/cehkunal/webapp.git > trufflehog'
@@ -54,6 +54,5 @@ pipeline {
         }
       }
     }
-    
   }
 }

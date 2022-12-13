@@ -10,15 +10,6 @@ pipeline {
             ''' 
       }
     }
-
-    stage ('Clean Images') {
-     steps {
-        sh '''
-            docker rm -vf $(docker ps -aq)
-            docker rmi -f $(docker images -aq)
-           '''
-    }
-      }
     
     stage ('Scan Git Secrets') {
       steps {
@@ -41,7 +32,7 @@ pipeline {
 
     stage ('SonarQube - SAST') {
       steps {
-          sh 'mvn sonar:sonar -Dsonar.projectKey=devsecops -Dsonar.host.url=http://192.168.48.136:9000 -Dsonar.login=d2b2459aca24add985f6d4b71bf11efd9a38a26f'
+          sh 'mvn sonar:sonar -Dsonar.projectKey=devsecops -Dsonar.host.url=http://192.168.48.136:9000 -Dsonar.login=1011d3cc19b970778e3986418a422f7dca5d827f'
         }
       }
     
@@ -51,11 +42,9 @@ pipeline {
        }
     }
 
-    stage ('DAST') {
+    stage ('DAST - ZAP') {
       steps {
-        sshagent(['zap']) {
-         sh 'docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080/webapp/" || true'
-        }
+        sh 'docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080/webapp/" || true'
       }
     }
   }

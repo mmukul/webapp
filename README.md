@@ -1,15 +1,3 @@
-This is a sample Web Application to use during Continuous Integration demos.
+[![Quality Gate Status](http://192.168.48.136:9000/api/project_badges/measure?project=devsecops&metric=alert_status)](http://192.168.48.136:9000/dashboard?id=devsecops)
 
-#Build Instruction
-
-```
-mvn3 clean package
-```
-
-#Deploy instruction
-
-Deploy ```target/WebApp.war``` on Tomcat
- 
-#TODO
- 
-Add instruction to deploy to ElasticBeanstalk
+This is a sample Web Application to use during DevSecOps CICD demos.
